@@ -1,0 +1,202 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Checkout example · Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+<link href="/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="form-validation.css" rel="stylesheet">
+  </head>
+  <body class="bg-light">
+    <div class="container">
+  <div class="py-5 text-center">
+    <img class="d-block mx-auto mb-4" src="/docs/4.2/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h2>Apartment Details</h2>
+  </div>
+
+    <div class="col-md-8 order-md-1" style="margin:auto">
+
+      <form class="needs-validation" novalidate method="POST" enctype="multipart/form-data" action="/users/newEntry">
+
+        <div class="mb-3">
+          <label for="address">Address</label>
+          <input type="text" class="form-control" id="address" placeholder="1234 Main St" name="address" required>
+          <div class="invalid-feedback">
+            Please enter your shipping address.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="CheckIn">CheckIn Time</label>
+          <input type="time" class="form-control" id="checkIn" name="checkIn" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="CheckOut">CheckOut Time</label>
+          <input type="time" class="form-control" id="address" placeholder="1234 Main St" name="checkOut" required>
+        </div>
+
+        <div class="row" style="">
+          <div class="col-md-5 mb-3">
+            <label for="maxPeople">maximum capacity</label>
+              <input class="form-control" type="number" value="1" name="maxPeople" min="1" max="6" style="width:100px;">
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="bathrooms">Bathrooms</label>
+              <input class="form-control" type="number" value="1" name="bathrooms" min="1" max="6" style="width:100px;">
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="bedrooms">bedrooms</label>
+              <input class="form-control" type="number" value="1" name="bedrooms" min="1" max="6" style="width:100px;">
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <label for="country">Country</label>
+            <select class="custom-select d-block w-100" id="country" name="country" required>
+              <option value="">Choose...</option>
+              <option>United States</option>
+            </select>
+            <div class="invalid-feedback">
+              Please select a valid country.
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="state">State</label>
+            <select class="custom-select d-block w-100" id="state" name="state" required>
+              <option value="">Choose...</option>
+              <option>California</option>
+            </select>
+            <div class="invalid-feedback">
+              Please provide a valid state.
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="zip">Zip</label>
+            <input type="text" class="form-control" id="zip" placeholder="" name="zip"required>
+            <div class="invalid-feedback">
+              Zip code required.
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div style="margin-left:15px">
+            <p style="margin-right:10px; text-decoration:underline; color:blue">choose livingroom picture to upload</p>
+            <input type="file" name="+
+            ">
+          </div>
+          <div style="margin-left:15px">
+            <p style="margin-right:10px; text-decoration:underline; color:blue">choose diningroom picture to upload</p>
+            <input type="file" name="diningroom">
+          </div>
+        </div>
+
+      <div class="row" style="margin-top:8px">
+          <div style="margin-left:15px">
+            <p style="margin-right:10px; text-decoration:underline; color:blue">choose bedroom picture to upload</p>
+            <input type="file" name="bedroom">
+          </div>
+          <div style="margin-left:15px">
+            <p style="margin-right:10px; text-decoration:underline; color:blue">choose another livingroom picture to upload</p>
+            <input type="file" name="livingroom2">
+          </div>
+        </div>
+
+        <hr class="mb-4">
+          <div class="row" style="margin-left:1px">
+            <div class="custom-control custom-checkbox" style="width:100px">
+              <input type="checkbox" class="custom-control-input" id="Accessibilty" onchange="checkbox('AccessibiltyValue')">
+              <input type="hidden" id="AccessibiltyValue" name="Accessibilty" value="off" checked>
+              <label class="custom-control-label" for="Accessibilty">wheelchair Access</label>
+            </div>
+            <div class="custom-control custom-checkbox" style="width:60px">
+              <input type="checkbox" class="custom-control-input" id="WiFi" onchange="checkbox('WiFiValue')">
+              <input type="hidden" id="WiFiValue" name="WiFi" value="off" checked>
+              <label class="custom-control-label" for="WiFi">WiFi</label>
+            </div>
+            <div class="custom-control custom-checkbox" style="width:80px">
+              <input type="checkbox" class="custom-control-input" id="Shower" onchange="checkbox('ShowerValue')">
+              <input type="hidden" id="ShowerValue" name="Shower" value="off" checked>
+              <label class="custom-control-label" for="Shower">Shower</label>
+            </div>
+            <div class="custom-control custom-checkbox" style="width:80px">
+              <input type="checkbox" class="custom-control-input" id="Kitchen" onchange="checkbox('KitchenValue')">
+              <input type="hidden" id="KitchenValue" name="Kitchen" value="off" checked>
+              <label class="custom-control-label" for="Kitchen">Kitchen</label>
+              </div>
+            <div class="custom-control custom-checkbox" style="width:90px">
+              <input type="checkbox" class="custom-control-input" id="Heating" onchange="checkbox('HeatingValue')">
+              <input type="hidden" id="HeatingValue" name="Heating" value="off" checked>
+              <label class="custom-control-label" for="Heating">Heating</label>
+            </div>
+            <div class="custom-control custom-checkbox" style="width:90px">
+              <input type="checkbox" class="custom-control-input" id="Tv" onchange="checkbox('TvValue')">
+              <input type="hidden" id="TvValue" name="Tv" value="off" checked>
+              <label class="custom-control-label" for="Tv">TV</label>
+            </div>
+          </div>
+
+        <div class="custom-control custom-checkbox" style="margin-top:20px">
+          <input type="checkbox" class="custom-control-input" id="save-info">
+          <label class="custom-control-label" for="save-info">Save this information for next time</label>
+        </div>
+        <hr class="mb-4">
+
+
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Post For Availability</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; 2017-2018 Company Name</p>
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="#">Privacy</a></li>
+      <li class="list-inline-item"><a href="#">Terms</a></li>
+      <li class="list-inline-item"><a href="#">Support</a></li>
+    </ul>
+  </footer>
+</div>
+<script>
+window.onload = function(){
+  document.getElementById('Accessibilty').checked = false;
+  document.getElementById('WiFi').checked = false;
+  document.getElementById('Shower').checked = false;
+  document.getElementById('Kitchen').checked = false;
+  document.getElementById('Heating').checked = false;
+  document.getElementById('Tv').checked = false;
+};
+
+function checkbox(box){
+  window.event.target.checked?document.getElementById(box).value ="on":document.getElementById(box).value = "off";
+};
+
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="/docs/4.2/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="/bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>
+        <script src="form-validation.js"></script></body>
+</html>

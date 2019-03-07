@@ -1,0 +1,7 @@
+TODO
+
+//*each user can make more than one apartment DONE
+
+*create search bar for apartments, only a specific number of apartments will show at once unless you scroll
+
+*create a search page with pictures of the apartment as the clickable icons that will direct you to the users apartment
