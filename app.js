@@ -26,6 +26,7 @@ app.use([
 app.use('/apartment', require('./routes/apartment'));
 app.use('/users', require('./routes/users'));
 app.use('/shop', require('./routes/shop'));
+app.use('/myApartments', require('./routes/myApartments'));
 
 app.get('/', (req,res)=>{
   res.end('so this is home.. ahh')
