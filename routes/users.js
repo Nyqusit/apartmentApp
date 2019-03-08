@@ -1,15 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const app = express();
-const hash = require('brown-hash/hasher.js');
-const models = require('../models');
-const User = models.user;
-const Apartment = models.apartment;
+const {createSalt,createHash} = require('../custom_modules/brown-hash/hasher.js');
+const {User,Apartment} = require('../models');
 const mkdirp = require('mkdirp');
 const path = require('path');
 const uploadPath = '/media/nyquist/Scay_Tery/dev/web/node_js/CRUD_ecomerce_project_1/CRUD_Ecommerce_15/public/photos';
 
-let userAccess = false;
+let userAccess =false;
 let userInfo = {};
 
 router.get('/login',(req,res)=>{
@@ -21,13 +19,13 @@ router.post('/login',(req,res)=>{
   User.find(query,(err,user)=>{
     if(err) console.log(err);
 
-    let salt = hash.createSalt();
-    let hashedPassword = hash.createHash(req.body.inputPassword)
+    let salt = createSalt();
+    let hashedPassword = createHash(req.body.inputPassword)
 
-    if(user.length > 0  &&  hash.createHash(salt+hashedPassword) === hash.createHash(salt+user[0].password)){
+    if(user.length > 0  &&  createHash(salt+hashedPassword) === createHash(salt+user[0].password)){
       userInfo = JSON.parse(JSON.stringify(user[0]));
       userAccess = true;
-      res.redirect('newEntry')
+      res.redirect('/users/me')
     }else
       res.render('login',{loginError:"login information was incorrect"});
   });
@@ -40,7 +38,7 @@ router.get('/register',(req,res)=>{
 router.post('/register', (req,res)=>{
   User.find({email:req.body.email},(err,user)=>{
       if(user.length === 0 && !err){
-        req.body.password = hash.createHash(req.body.password);
+        req.body.password = createHash(req.body.password);
         req.body.numberOfApartments = 0;
         let newUser = new User(req.body);
         newUser.save((err)=>{
@@ -58,12 +56,11 @@ router.post('/register', (req,res)=>{
   });
 });
 
-
 //routes only available if signed in
 
 router.get('/newEntry',(req,res)=>{
   if(userAccess){
-    res.sendFile('/media/nyquist/Scay_Tery/dev/web/node_js/CRUD_ecomerce_project_1/CRUD_Ecommerce_15/views/newEntry.html');
+    res.sendFile('/media/nyquist/Scay_Tery/dev/web/node_js/apart/16/views/newEntry.html');
   }else{
     res.render('accessDenied');
   }
@@ -102,5 +99,14 @@ router.post('/newEntry',(req,res)=>{
   res.render('accessDenied');
   }
 })
+
+router.get('/me',(req,res)=>{
+  if(userAccess){
+    res.render('userpage');
+  }else{
+    res.render('accessDenied')
+  }
+
+});
 
 module.exports = router;

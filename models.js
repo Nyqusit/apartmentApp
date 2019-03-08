@@ -77,8 +77,14 @@ const apartmentSchema = mongoose.Schema({
      }
 });
 
+const myApartmentsSchema = mongoose.Schema({
+  test:{
+    type:String
+  }
+})
 
-mod.user = mongoose.model('Users',userSchema);
-mod.apartment = mongoose.model('apartments',apartmentSchema);
+mod.User = mongoose.model('Users',userSchema);
+mod.Apartment = mongoose.model('apartments',apartmentSchema);
+mod.MyApartments = mongoose.model('myApartments',myApartmentsSchema);
 
 module.exports = mod;
