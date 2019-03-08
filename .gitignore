@@ -1,3 +1,3 @@
 /node_modules
-/public/bootstrap
-package-lock.jsonr
+/public
+package-lock.json

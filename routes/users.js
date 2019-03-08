@@ -5,7 +5,7 @@ const {createSalt,createHash} = require('../custom_modules/brown-hash/hasher.js'
 const {User,Apartment} = require('../models');
 const mkdirp = require('mkdirp');
 const path = require('path');
-const uploadPath = '/media/nyquist/Scay_Tery/dev/web/node_js/CRUD_ecomerce_project_1/CRUD_Ecommerce_15/public/photos';
+const uploadPath = '/media/nyquist/Scay_Tery/dev/web/node_js/apart/16/public/photos';
 
 let userAccess =false;
 let userInfo = {};
