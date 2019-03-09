@@ -93,7 +93,7 @@ router.post('/newEntry',(req,res)=>{
       });
     });
 
-    res.send('done');
+    res.redirect('/users/me');
   }
  if(!userAccess){
   res.render('accessDenied');
@@ -108,5 +108,24 @@ router.get('/me',(req,res)=>{
   }
 
 });
+
+router.get('/myApartments',(req,res)=>{
+  if(userAccess){
+    Apartment.find({owner:userInfo.email},(err,apartments)=>{
+      if(err)
+        console.log(err);
+      else
+        res.render('myApartments',{
+          apartments: apartments
+        });
+    })
+  }else{
+    res.render('accessDenied')
+  }
+});
+
+router.get('/myApartments/edit/:id',(req,res)=>{
+  res.end('update')
+})
 
 module.exports = router;

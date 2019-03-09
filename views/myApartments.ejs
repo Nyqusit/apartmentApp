@@ -1,0 +1,57 @@
+
+<style>
+.themed-grid-col {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: rgba(86, 61, 124, .15);
+  border: 1px solid rgba(86, 61, 124, .2);
+}
+
+#livinroomSlide,
+#diningroomSlide,
+#livingroomSlide,
+#livingroom2Slide{
+  width:24%;
+  height:100%;
+}
+</style>
+
+<header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
+  <span class="w3-bar-item">Register</span>
+  <a href="javascript:void(0)" class="w3-right w3-bar-item w3-button" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+</header>
+  <div class="w3-main w3-white" style="margin-left:260px">
+
+    <form class="form-signin" method="POST" action='/users/register' style="width:80%; margin:auto">
+      <div class="text-center mb-3"style=" text-align: center; margin-left:2px; margin-right:auto" >
+        <img class="mb-4" src="/docs/4.2/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <hr style="visibility: hidden">
+        <h1 class="h3 mb-3 font-weight-normal">search</h1>
+
+      <div class="form-label-group">
+
+        <%apartments.forEach((apartment,idx)=>{%>
+          <div class="row mb-3" style="width:100%; ">
+            <div class="col-md-8 themed-grid-col">
+              <div class="pb-3">
+                  <a href="http://10.0.0.43:3000/apartment/<%=apartment._id%>"><%=apartment.owner%></a>
+              </div>
+              <div class="row">
+                <div class="col-md-6 themed-grid-col"><%=apartment.address%></div>
+                <div class="col-md-6 themed-grid-col">
+                  <a href="http://10.0.0.43:3000/users/myApartments/edit/<%=apartment._id%>">edit</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 themed-grid-col" style="margin:auto;">
+              <img id="livinroomSlide" style="margin-bottom:-6px" src="http://10.0.0.43:3000/photos/<%=apartment.owner%>/<%=apartment.apartmentNumber%>/bedroom.jpg">
+              <img id="diningroomSlide" style="margin-bottom:-6px" src="http://10.0.0.43:3000/photos/<%=apartment.owner%>/<%=apartment.apartmentNumber%>/diningroom.jpg">
+              <img id="livingroomSlide" style="margin-bottom:-6px" src="http://10.0.0.43:3000/photos/<%=apartment.owner%>/<%=apartment.apartmentNumber%>/livingroom.jpg">
+              <img id="livingroom2Slide" style="margin-bottom:-6px" src="http://10.0.0.43:3000/photos/<%=apartment.owner%>/<%=apartment.apartmentNumber%>/livingroom2.jpg">
+            </div>
+        </div>
+        <br>
+        <%});%>
+
+      </div>
+    </form>
