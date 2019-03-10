@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const app = express();
-const {createSalt,createHash} = require('../custom_modules/brown-hash/hasher.js');
+const {createSalt,createHash} = require('../custom_modules/hasher.js');
 const {User,Apartment} = require('../models');
 const mkdirp = require('mkdirp');
 const path = require('path');
-const uploadPath = '/media/nyquist/Scay_Tery/dev/web/node_js/apart/16/public/photos';
+const uploadPath = '/media/nyquist/Scay_Tery/dev/web/node_js/apart/16/public/users';
+const fs = require('fs');
 
 let userAccess =false;
 let userInfo = {};
@@ -46,6 +47,14 @@ router.post('/register', (req,res)=>{
             mkdirp(path.join(uploadPath,req.body.email),(err)=>{
               if(err) console.log(err);
             });
+            mkdirp(path.join(uploadPath,req.body.email,"js"),(err)=>{
+              if(err) console.log(err);
+            });
+            fs.writeFile("/media/nyquist/Scay_Tery/dev/web/node_js/apart/16/public/users/"+ req.body.email + "/js/apartment.js","",(err)=>{
+              if(err){
+                throw err;
+              }
+            })
             res.redirect('/');
           }
           console.log(err);
@@ -70,11 +79,16 @@ router.post('/newEntry',(req,res)=>{
   if(userAccess){
     const fileNames = ["livingroom.jpg","diningroom.jpg","bedroom.jpg","livingroom2.jpg"];
     userInfo.numberOfApartments++;
-    let picPath = path.join(uploadPath,userInfo.email,userInfo.numberOfApartments.toString());
+    let picPath = path.join(uploadPath,userInfo.email,"photos");
+    let currentPath = path.join(picPath,userInfo.numberOfApartments.toString());
 
     mkdirp(picPath,(err)=>{
       if(err) console.log(err);
     });
+    mkdirp(currentPath,(err)=>{
+      if(err) console.log(err);
+    });
+
 
     req.body.owner = userInfo.email;
     req.body.apartmentNumber = userInfo.numberOfApartments;
@@ -88,7 +102,7 @@ router.post('/newEntry',(req,res)=>{
     })
 
     Object.values(req.files).forEach((files,idx)=>{
-      files.mv(path.join(picPath,fileNames[idx]),(err)=>{
+      files.mv(path.join(currentPath,fileNames[idx]),(err)=>{
           if(err)console.log(err);
       });
     });
@@ -125,7 +139,36 @@ router.get('/myApartments',(req,res)=>{
 });
 
 router.get('/myApartments/edit/:id',(req,res)=>{
-  res.end('update')
+  Apartment.findById(req.params.id,(err,apartment)=>{
+
+    fs.writeFile("/media/nyquist/Scay_Tery/dev/web/node_js/apart/16/public/js/apartment.js",
+    `const Apartment = {
+      address:"${apartment.address}",
+    	checkIn : "${apartment.checkIn}",
+    	checkOut : "${apartment.checkOut}",
+    	maxPeople : ${apartment.maxPeople},
+    	bathrooms : ${apartment.bathrooms},
+    	bedrooms : ${apartment.bedrooms},
+    	country : "${apartment.country}",
+    	state : "${apartment.state}",
+    	zip : ${apartment.zip},
+    	Accessibilty : "${apartment.Accessibilty}",
+    	WiFi : "${apartment.WiFi}",
+    	Shower : "${apartment.Shower}",
+    	Kitchen : "${apartment.Kitchen}",
+    	Heating : "${apartment.Heating}",
+    	Tv : "${apartment.Tv}",
+    	owner : "${apartment.owner}",
+    	apartmentNumber : ${apartment.apartmentNumber}
+    }
+    `,(err)=>{
+      if(err){
+        throw err
+      }
+    }
+  );
+  })
+  res.sendFile('/media/nyquist/Scay_Tery/dev/web/node_js/apart/16/views/edit.html')
 })
 
 module.exports = router;

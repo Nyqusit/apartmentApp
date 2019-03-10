@@ -5,3 +5,7 @@ TODO
 *create search bar for apartments, only a specific number of apartments will show at once unless you scroll
 
 *create a search page with pictures of the apartment as the clickable icons that will direct you to the users apartment
+
+
+since I cannot send information to an html file like I can with an ejs file, the edit page will be difficult.
+My idea is to make a js page that I will write the information I need to  with js syntax and have the html file excess that 

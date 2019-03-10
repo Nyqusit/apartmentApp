@@ -1,47 +1,4 @@
-<!DOCTYPE html>
-<html>
-<title>Apartment Shoper</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-<link rel="stylesheet" href="css/editorModalBox.css">
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
-.mySlides {display: none}
-</style>
-<body class="w3-content w3-border-left w3-border-right">
 
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-light-grey w3-collapse w3-top" style="z-index:3;width:260px" id="mySidebar">
-  <div class="w3-container w3-display-container w3-padding-16">
-    <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-transparent w3-display-topright"></i>
-    <h3>Book</h3>
-
-    <hr>
-    <form action="/action_page.php" target="_blank" >
-      <p><label><i class="fa fa-calendar-check-o"></i> Check In</label></p>
-      <input class="w3-input w3-border" type="text" placeholder="DD MM YYYY" name="CheckIn" required>
-      <p><label><i class="fa fa-calendar-o"></i> Check Out</label></p>
-      <input class="w3-input w3-border" type="text" placeholder="DD MM YYYY" name="CheckOut" required>
-      <p><label><i class="fa fa-male"></i> Adults</label></p>
-      <input class="w3-input w3-border" type="number" value="1" name="Adults" min="1" max="6">
-      <p><label><i class="fa fa-child"></i> Kids</label></p>
-      <input class="w3-input w3-border" type="number" value="0" name="Kids" min="0" max="6">
-      <br>
-      <p><button class="w3-button w3-block w3-green w3-left-align" type="submit"><i class="fa fa-search w3-margin-right"></i> Search availability</button></p>
-    </form>
-  </div>
-  <div class="w3-bar-block">
-    <a href="http://10.0.0.43:3000/shop" class="w3-bar-item w3-button w3-padding-16"><i class="fa fa-building"></i> Apartments</a>
-    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-16" onclick="document.getElementById('subscribe').style.display='block'"><i class="fa fa-rss"></i> Subscribe</a>
-    <a href="#contact" class="w3-bar-item w3-button w3-padding-16"><i class="fa fa-envelope"></i> Contact</a>
-    <a href="http://10.0.0.43:3000/users/login" class="w3-bar-item w3-button w3-padding-16" ><i class="login"><img src="http://10.0.0.43:3000/photos/shop/login.png" alt="Smiley face" height="15" width="15.02"></i> login</a>
-    <a href="http://10.0.0.43:3000/users/register" class="w3-bar-item w3-button w3-padding-16"><i class="login"><img src="http://10.0.0.43:3000/photos/shop/register.png" alt="Smiley face" height="18" width="18.02"></i> Register</a>
-  </div>
-</nav>
 
 <!-- Top menu on small screens -->
 <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
@@ -62,25 +19,25 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
   <div class="w3-container" id="apartment">
     <h2 class="w3-text-green">The Apartment</h2>
     <div class="w3-display-container mySlides">
-    <img id="livinroomSlide" style="width:100%;margin-bottom:-6px" src="http://10.0.0.43:3000/photos/<%=owner%>/<%=apartmentNumber%>/livingroom.jpg">
+    <img id="livinroomSlide" style="width:100%;margin-bottom:-6px" src="http://10.0.0.43:3000/users/<%=owner%>/photos/<%=apartmentNumber%>/livingroom.jpg">
       <div class="w3-display-bottomleft w3-container w3-black">
         <p>Living Room</p>
       </div>
     </div>
     <div class="w3-display-container mySlides">
-    <img id="diningroomSlide" style="width:100%;margin-bottom:-6px" src="http://10.0.0.43:3000/photos/<%=owner%>/<%=apartmentNumber%>/diningroom.jpg">
+    <img id="diningroomSlide" style="width:100%;margin-bottom:-6px" src="http://10.0.0.43:3000/users/<%=owner%>/photos/<%=apartmentNumber%>/diningroom.jpg">
       <div class="w3-display-bottomleft w3-container w3-black">
         <p>Dining Room</p>
       </div>
     </div>
     <div class="w3-display-container mySlides">
-    <img id="bedroomSlide" style="width:100%;margin-bottom:-6px" src="http://10.0.0.43:3000/photos/<%=owner%>/<%=apartmentNumber%>/bedroom.jpg">
+    <img id="bedroomSlide" style="width:100%;margin-bottom:-6px" src="http://10.0.0.43:3000/users/<%=owner%>/photos/<%=apartmentNumber%>/bedroom.jpg">
       <div class="w3-display-bottomleft w3-container w3-black">
         <p>Bedroom</p>
       </div>
     </div>
     <div class="w3-display-container mySlides">
-    <img id="livingroom2roomSlide" style="width:100%;margin-bottom:-6px" src="http://10.0.0.43:3000/photos/<%=owner%>/<%=apartmentNumber%>/livingroom2.jpg">
+    <img id="livingroom2roomSlide" style="width:100%;margin-bottom:-6px" src="http://10.0.0.43:3000/users/<%=owner%>/photos/<%=apartmentNumber%>/livingroom2.jpg">
       <div class="w3-display-bottomleft w3-container w3-black">
         <p>Living Room II</p>
       </div>
@@ -89,19 +46,19 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
   <div class="w3-row-padding w3-section">
     <div class="w3-col s3">
       <img class="demo w3-opacity w3-hover-opacity-off" id="livingroom" style="width:100%;cursor:pointer" onclick="currentDiv(1)" title="Living room"
-      src="http://10.0.0.43:3000/photos/<%=owner%>/<%=apartmentNumber%>/livingroom.jpg" height="100">
+      src="http://10.0.0.43:3000/users/<%=owner%>/photos/<%=apartmentNumber%>/livingroom.jpg" height="100">
     </div>
     <div class="w3-col s3">
       <img class="demo w3-opacity w3-hover-opacity-off" id="diningroom" style="width:100%;cursor:pointer" onclick="currentDiv(2)" title="Dining room"
-      src="http://10.0.0.43:3000/photos/<%=owner%>/<%=apartmentNumber%>/diningroom.jpg" height="100">
+      src="http://10.0.0.43:3000/users/<%=owner%>/photos/<%=apartmentNumber%>/diningroom.jpg" height="100">
     </div>
     <div class="w3-col s3">
       <img class="demo w3-opacity w3-hover-opacity-off" id="bedroom" style="width:100%;cursor:pointer" onclick="currentDiv(3)" title="Bedroom"
-      src="http://10.0.0.43:3000/photos/<%=owner%>/<%=apartmentNumber%>/bedroom.jpg" height="100">
+      src="http://10.0.0.43:3000/users/<%=owner%>/photos/<%=apartmentNumber%>/bedroom.jpg" height="100">
     </div>
     <div class="w3-col s3">
       <img class="demo w3-opacity w3-hover-opacity-off" id="livingroom2" style="width:100%;cursor:pointer" onclick="currentDiv(4)" title="Second Living Room"
-      src="http://10.0.0.43:3000/photos/<%=owner%>/<%=apartmentNumber%>/livingroom2.jpg" height="100">
+      src="http://10.0.0.43:3000/users/<%=owner%>/photos/<%=apartmentNumber%>/livingroom2.jpg" height="100">
     </div>
   </div>
 
