@@ -24,6 +24,7 @@ router.post('/login',(req,res)=>{
     let hashedPassword = createHash(req.body.inputPassword)
 
     if(user.length > 0  &&  createHash(salt+hashedPassword) === createHash(salt+user[0].password)){
+      userInfo = {};
       userInfo = JSON.parse(JSON.stringify(user[0]));
       userAccess = true;
       res.redirect('/users/me')
@@ -47,14 +48,6 @@ router.post('/register', (req,res)=>{
             mkdirp(path.join(uploadPath,req.body.email),(err)=>{
               if(err) console.log(err);
             });
-            mkdirp(path.join(uploadPath,req.body.email,"js"),(err)=>{
-              if(err) console.log(err);
-            });
-            fs.writeFile("/media/nyquist/Scay_Tery/dev/web/node_js/apart/16/public/users/"+ req.body.email + "/js/apartment.js","",(err)=>{
-              if(err){
-                throw err;
-              }
-            })
             res.redirect('/');
           }
           console.log(err);
@@ -85,10 +78,10 @@ router.post('/newEntry',(req,res)=>{
     mkdirp(picPath,(err)=>{
       if(err) console.log(err);
     });
+
     mkdirp(currentPath,(err)=>{
       if(err) console.log(err);
     });
-
 
     req.body.owner = userInfo.email;
     req.body.apartmentNumber = userInfo.numberOfApartments;
@@ -139,36 +132,7 @@ router.get('/myApartments',(req,res)=>{
 });
 
 router.get('/myApartments/edit/:id',(req,res)=>{
-  Apartment.findById(req.params.id,(err,apartment)=>{
-
-    fs.writeFile("/media/nyquist/Scay_Tery/dev/web/node_js/apart/16/public/js/apartment.js",
-    `const Apartment = {
-      address:"${apartment.address}",
-    	checkIn : "${apartment.checkIn}",
-    	checkOut : "${apartment.checkOut}",
-    	maxPeople : ${apartment.maxPeople},
-    	bathrooms : ${apartment.bathrooms},
-    	bedrooms : ${apartment.bedrooms},
-    	country : "${apartment.country}",
-    	state : "${apartment.state}",
-    	zip : ${apartment.zip},
-    	Accessibilty : "${apartment.Accessibilty}",
-    	WiFi : "${apartment.WiFi}",
-    	Shower : "${apartment.Shower}",
-    	Kitchen : "${apartment.Kitchen}",
-    	Heating : "${apartment.Heating}",
-    	Tv : "${apartment.Tv}",
-    	owner : "${apartment.owner}",
-    	apartmentNumber : ${apartment.apartmentNumber}
-    }
-    `,(err)=>{
-      if(err){
-        throw err
-      }
-    }
-  );
+    res.end('this is my appartment page !page')
   })
-  res.sendFile('/media/nyquist/Scay_Tery/dev/web/node_js/apart/16/views/edit.html')
-})
 
 module.exports = router;
