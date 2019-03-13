@@ -60,16 +60,26 @@ router.post('/register', (req,res)=>{
 
 //routes only available if signed in
 
+function grant_access(path){
+    let pat = path.match(/html$/g);
+
+    if(userAccess){
+        return path
+    }else{
+        //return 'accessDenied'
+        if(pat == "html"){
+            return '/media/nyquist/Scay_Tery/dev/web/node_js/apart/16/views/accessDenied.html'
+        }else{
+            return 'accessDenied'
+        }
+    }
+}
+
 router.get('/newEntry',(req,res)=>{
-  if(userAccess){
-    res.sendFile('/media/nyquist/Scay_Tery/dev/web/node_js/apart/16/views/newEntry.html');
-  }else{
-    res.render('accessDenied');
-  }
+    res.sendFile(grant_access('/media/nyquist/Scay_Tery/dev/web/node_js/apart/16/views/newEntry.html'));
 });
 
 router.post('/newEntry',(req,res)=>{
-  if(userAccess){
     const fileNames = ["livingroom.jpg","diningroom.jpg","bedroom.jpg","livingroom2.jpg"];
     userInfo.numberOfApartments++;
     let picPath = path.join(uploadPath,userInfo.email,"photos");
@@ -99,40 +109,27 @@ router.post('/newEntry',(req,res)=>{
           if(err)console.log(err);
       });
     });
-
-    res.redirect('/users/me');
-  }
- if(!userAccess){
-  res.render('accessDenied');
-  }
 })
 
 router.get('/me',(req,res)=>{
-  if(userAccess){
-    res.render('userpage');
-  }else{
-    res.render('accessDenied')
-  }
-
+    res.render(grant_access('userpage'));
 });
 
 router.get('/myApartments',(req,res)=>{
-  if(userAccess){
     Apartment.find({owner:userInfo.email},(err,apartments)=>{
-      if(err)
-        console.log(err);
-      else
-        res.render('myApartments',{
-          apartments: apartments
-        });
+        if(err){
+             console.log(err);
+        }
+        else{
+            res.render(grant_access('myApartments'),{
+              apartments: apartments
+           })
+        }
     })
-  }else{
-    res.render('accessDenied')
-  }
 });
 
 router.get('/myApartments/edit/:id',(req,res)=>{
-    res.end('this is my appartment page !page')
+    res.sendFile(grant_access('/media/nyquist/Scay_Tery/dev/web/node_js/apart/16/views/edit.html'))
   })
 
 module.exports = router;
