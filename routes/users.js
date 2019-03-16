@@ -3,7 +3,6 @@ const router = express.Router();
 const app = express();
 const {createSalt,createHash} = require('../custom_modules/hasher.js');
 const {User,Apartment} = require('../models');
-const mkdirp = require('mkdirp');
 const path = require('path');
 const uploadPath = '/media/nyquist/Scay_Tery/dev/web/node_js/apart/16/public/users';
 const fs = require('fs');
@@ -45,9 +44,12 @@ router.post('/register', (req,res)=>{
         let newUser = new User(req.body);
         newUser.save((err)=>{
           if(!err){
-            mkdirp(path.join(uploadPath,req.body.email),(err)=>{
-              if(err) console.log(err);
-            });
+              fs.mkdir(path.join(uploadPath,req.body.email), { recursive: false  }, (err) => {
+                  if(err){
+                      console.log(err)
+                  }
+              });
+
             res.redirect('/');
           }
           console.log(err);
@@ -76,38 +78,42 @@ function grant_access(path){
 }
 
 router.get('/newEntry',(req,res)=>{
+    let picPath = path.join(uploadPath,userInfo.email,"img");
+    if(userInfo.numberOfApartments === 0){
+        fs.mkdir(picPath,{recursive:false},(err)=>{
+            console.log(err);
+        })
+    }
     res.sendFile(grant_access('/media/nyquist/Scay_Tery/dev/web/node_js/apart/16/views/newEntry.html'));
 });
 
 router.post('/newEntry',(req,res)=>{
     const fileNames = ["livingroom.jpg","diningroom.jpg","bedroom.jpg","livingroom2.jpg"];
     userInfo.numberOfApartments++;
-    let picPath = path.join(uploadPath,userInfo.email,"photos");
-    let currentPath = path.join(picPath,userInfo.numberOfApartments.toString());
 
-    mkdirp(picPath,(err)=>{
-      if(err) console.log(err);
+    let currentPath = path.join(uploadPath,userInfo.email,"img",userInfo.numberOfApartments.toString());
+
+    fs.mkdir(currentPath,{recursive:false},(err)=>{
+        console.log(err);
+    })
+
+    Object.values(req.files).forEach((files,idx)=>{
+        files.mv(path.join(currentPath,fileNames[idx]),(err)=>{
+            if(err)console.log(err);
+        });
     });
 
-    mkdirp(currentPath,(err)=>{
-      if(err) console.log(err);
-    });
+    User.updateOne({email:userInfo.email},userInfo)
 
     req.body.owner = userInfo.email;
     req.body.apartmentNumber = userInfo.numberOfApartments;
     let newAppartment = new Apartment(req.body);
     newAppartment.save((err)=>{
-        if(err) console.log(err);
-    });
-    User.update({email:userInfo.email},userInfo,(err)=>{
-      if(err)
-      console.log(err)
-    })
-
-    Object.values(req.files).forEach((files,idx)=>{
-      files.mv(path.join(currentPath,fileNames[idx]),(err)=>{
-          if(err)console.log(err);
-      });
+        if(err){
+            console.log(err);
+        }else{
+            res.redirect(grant_access('/'));
+        }
     });
 })
 
